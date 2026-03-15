@@ -109,7 +109,7 @@ Statistical analysis reveals a fundamental data limitation:
 
 - **AD vs. CN:** Highly separable, theta/alpha ratio p < 0.001, AUC 0.898
 - **FTD vs. CN:** Separable, p < 0.001, AUC 0.559
-- **AD vs. FTD:** Not separable by any spectral feature — p = 0.13, Cohen's d < 0.35, AUC ≈ 0.5
+- **AD vs. FTD:** Not separable by any spectral feature, p = 0.13, Cohen's d < 0.35, AUC ≈ 0.5
 
 The MMSE correlates with alpha/theta ratio (r=0.51, p<0.001), suggesting EEG reflects a **continuous cognitive decline** rather than discrete disease categories. This is the binding constraint on model performance, not architecture or training strategy.
 
