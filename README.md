@@ -1,6 +1,6 @@
 # EEG-Based Dementia Subtype Classification
 
-A deep learning project classifying resting-state EEG recordings into three diagnostic categories — Alzheimer's Disease (AD), Frontotemporal Dementia (FTD), and Cognitively Normal controls (CN) — using convolutional neural networks and traditional machine learning baselines.
+A deep learning project classifying resting-state EEG recordings into three diagnostic categories, Alzheimer's Disease (AD), Frontotemporal Dementia (FTD), and Cognitively Normal controls (CN), using convolutional neural networks and traditional machine learning baselines.
 
 **Course:** COMP4531 Deep Learning · University of Denver · March 2026
 **Author:** Alex Valone
@@ -22,13 +22,13 @@ A deep learning project classifying resting-state EEG recordings into three diag
 Segment-level: **64.9% accuracy, 0.550 Macro F1**
 Subject-level (majority vote): **71.4% accuracy (10/14), 0.552 Macro F1**
 
-For comparison, the published SOTA on this dataset reports ~80.3% subject-level accuracy using domain-specific pretraining — this project achieves 71.4% with no pretraining.
+For comparison, the published SOTA on this dataset reports ~80.3% subject-level accuracy using domain-specific pretraining, this project achieves 71.4% with no pretraining.
 
 ---
 
 ## Dataset
 
-**OpenNeuro ds004504** (CC0 License) — publicly available resting-state EEG:
+**OpenNeuro ds004504** (CC0 License): publicly available resting-state EEG:
 
 | Group | Subjects | Mean MMSE |
 |-------|----------|-----------|
@@ -60,7 +60,7 @@ EEG_Dementia_Classification/
 
 ### Preprocessing
 
-- **Segmentation:** 4-second non-overlapping windows (2000 samples) with 50% overlap → ~34,788 total segments
+- **Segmentation:** 4-second non-overlapping windows (2000 samples) with 50% overlap -> ~34,788 total segments
 - **Normalization:** Z-score per channel, statistics from training set only
 - **Subject-level split** (prevents data leakage): 61 train / 13 val / 14 test subjects
 - **Class imbalance:** Weighted Focal Loss (γ=2.0) with inverse-frequency class weights
@@ -87,7 +87,7 @@ Parameters: 646,211
 
 **Training:** Adam optimizer, cosine annealing LR (5e-4 initial), weight decay 5e-4, early stopping (patience=10 on val F1)
 
-### Refinement Strategy (V1 → V7b)
+### Refinement Strategy (V1 -> V7b)
 
 7 refinement iterations exploring:
 1. Data augmentation (Gaussian noise, amplitude scaling, channel dropout, time shift)
@@ -95,7 +95,7 @@ Parameters: 646,211
 3. Regularization (L2 weight decay, GroupNorm)
 4. EEGNet-inspired spatial-temporal blocks
 5. Hyperparameter grid search
-6. **Mixup regularization** (α=0.2) — final best model
+6. **Mixup regularization** (α=0.2); final best model
 
 **Key finding:** Augmentation hurts when applied aggressively; mild noise + Mixup gives the best generalization.
 
@@ -107,11 +107,11 @@ Parameters: 646,211
 
 Statistical analysis reveals a fundamental data limitation:
 
-- **AD vs. CN:** Highly separable — theta/alpha ratio p < 0.001, AUC 0.898
-- **FTD vs. CN:** Separable — p < 0.001, AUC 0.559
+- **AD vs. CN:** Highly separable, theta/alpha ratio p < 0.001, AUC 0.898
+- **FTD vs. CN:** Separable, p < 0.001, AUC 0.559
 - **AD vs. FTD:** Not separable by any spectral feature — p = 0.13, Cohen's d < 0.35, AUC ≈ 0.5
 
-The MMSE correlates with alpha/theta ratio (r=0.51, p<0.001), suggesting EEG reflects a **continuous cognitive decline** rather than discrete disease categories. This is the binding constraint on model performance — not architecture or training strategy.
+The MMSE correlates with alpha/theta ratio (r=0.51, p<0.001), suggesting EEG reflects a **continuous cognitive decline** rather than discrete disease categories. This is the binding constraint on model performance, not architecture or training strategy.
 
 ### Subject-Level Results (Test Set, 14 subjects)
 
@@ -126,7 +126,6 @@ FTD resting-state EEG is clinically indistinguishable from AD at this recording 
 The model demonstrates useful uncertainty awareness:
 - Correctly classified subjects averaged confidence **0.684**
 - Incorrectly classified subjects averaged confidence **0.616**
-- The model "knows when it doesn't know"
 
 ---
 
@@ -140,8 +139,8 @@ The model demonstrates useful uncertainty awareness:
 | Mild data augmentation | Small improvement |
 | Mixup (α=0.2) | Best subject-level F1 (+5.3% vs. no Mixup) |
 | Aggressive augmentation | Hurt performance |
-| BiLSTM | Worse than CNN — resting EEG lacks long-range temporal structure |
-| Architecture reduction | No benefit — ceiling is data, not capacity |
+| BiLSTM | Worse than CNN, resting EEG lacks long-range temporal structure |
+| Architecture reduction | No benefit, ceiling in data |
 | GroupNorm (small batch) | Degenerate solution |
 
 ---
