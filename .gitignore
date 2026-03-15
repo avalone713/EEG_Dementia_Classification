@@ -1,0 +1,42 @@
+# Data (large files — download from OpenNeuro ds004504)
+data/
+raw/
+processed/
+*.set
+*.fdt
+*.edf
+*.bdf
+
+# Model checkpoints
+*.pth
+*.pt
+*.h5
+*.pkl
+checkpoints/
+models/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# macOS
+.DS_Store
+
+# Outputs / logs
+logs/
+runs/
+wandb/
+*.log
+
+# Large result caches
+*.npy
+*.npz
+spectrograms/
